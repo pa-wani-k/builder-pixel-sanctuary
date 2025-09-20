@@ -21,7 +21,7 @@ function loadGoogleMaps(apiKey: string): Promise<void> {
 
 export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c: Centre) => void }) {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const map = useRef<google.maps.Map | null>(null);
+  const map = useRef<any | null>(null);
   const [centres, setCentres] = useState<Centre[]>([]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
