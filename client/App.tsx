@@ -23,9 +23,8 @@ const App = () => (
           <Route element={<Layout />}>
             <Route index element={<Index />} />
             <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-          {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
