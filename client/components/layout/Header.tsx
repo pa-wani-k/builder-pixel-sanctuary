@@ -12,7 +12,9 @@ export default function Header() {
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Leaf className="h-5 w-5" />
           </span>
-          <span className="text-xl font-extrabold tracking-tight">Ayursutra</span>
+          <span className="text-xl font-extrabold tracking-tight">
+            Ayursutra
+          </span>
         </Link>
         <nav className="flex items-center gap-6 text-sm">
           <NavLink

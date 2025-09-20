@@ -3,7 +3,13 @@ import GooglePlacesMap from "@/components/maps/GooglePlacesMap";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import type { Appointment, Centre, Patient } from "@shared/api";
 import { format } from "date-fns";
@@ -17,8 +23,12 @@ export default function Dashboard() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    fetch("/api/patient").then((r) => r.json()).then(setPatient);
-    fetch("/api/appointments").then((r) => r.json()).then(setAppointments);
+    fetch("/api/patient")
+      .then((r) => r.json())
+      .then(setPatient);
+    fetch("/api/appointments")
+      .then((r) => r.json())
+      .then(setAppointments);
   }, []);
 
   async function book() {
@@ -46,7 +56,9 @@ export default function Dashboard() {
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Welcome{patient ? `, ${patient.firstName}` : ""}</CardTitle>
+            <CardTitle>
+              Welcome{patient ? `, ${patient.firstName}` : ""}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {patient && (
@@ -65,7 +77,9 @@ export default function Dashboard() {
                 </div>
                 <div>
                   <div className="text-foreground/60">Blood Group</div>
-                  <div className="font-medium">{patient.medical.bloodGroup}</div>
+                  <div className="font-medium">
+                    {patient.medical.bloodGroup}
+                  </div>
                 </div>
                 <div className="md:col-span-2">
                   <div className="text-foreground/60">Address</div>
@@ -73,15 +87,21 @@ export default function Dashboard() {
                 </div>
                 <div className="md:col-span-2">
                   <div className="text-foreground/60">Conditions</div>
-                  <div className="font-medium">{patient.medical.conditions.join(", ")}</div>
+                  <div className="font-medium">
+                    {patient.medical.conditions.join(", ")}
+                  </div>
                 </div>
                 <div className="md:col-span-2">
                   <div className="text-foreground/60">Allergies</div>
-                  <div className="font-medium">{patient.medical.allergies.join(", ")}</div>
+                  <div className="font-medium">
+                    {patient.medical.allergies.join(", ")}
+                  </div>
                 </div>
                 <div className="md:col-span-2">
                   <div className="text-foreground/60">Medications</div>
-                  <div className="font-medium">{patient.medical.medications.join(", ")}</div>
+                  <div className="font-medium">
+                    {patient.medical.medications.join(", ")}
+                  </div>
                 </div>
               </div>
             )}
@@ -93,12 +113,16 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent className="space-y-3">
             {appointments.length === 0 && (
-              <div className="text-sm text-foreground/60">No appointments booked yet.</div>
+              <div className="text-sm text-foreground/60">
+                No appointments booked yet.
+              </div>
             )}
             {appointments.map((a) => (
               <div key={a.id} className="rounded-lg border p-3">
                 <div className="font-medium">{a.centre.name}</div>
-                <div className="text-sm text-foreground/70">{a.centre.address}</div>
+                <div className="text-sm text-foreground/70">
+                  {a.centre.address}
+                </div>
                 <div className="mt-1 text-sm font-medium">
                   {format(new Date(a.slotISO), "EEE, dd MMM yyyy p")}
                 </div>
@@ -111,7 +135,9 @@ export default function Dashboard() {
       <section id="centres" className="space-y-4">
         <div>
           <h2 className="text-xl font-semibold">Find Panchakarma Centres</h2>
-          <p className="text-sm text-foreground/70">Search nearby centres and book an appointment.</p>
+          <p className="text-sm text-foreground/70">
+            Search nearby centres and book an appointment.
+          </p>
         </div>
         <GooglePlacesMap onSelectCentre={(c) => setSelected(c)} />
       </section>
@@ -130,17 +156,29 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
                   <Label htmlFor="date">Date</Label>
-                  <Input id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                  <Input
+                    id="date"
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                  />
                 </div>
                 <div>
                   <Label htmlFor="time">Time</Label>
-                  <Input id="time" type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                  <Input
+                    id="time"
+                    type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
           )}
           <DialogFooter>
-            <Button variant="secondary" onClick={() => setSelected(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setSelected(null)}>
+              Cancel
+            </Button>
             <Button onClick={book} disabled={!date || !time || submitting}>
               {submitting ? "Booking..." : "Confirm Booking"}
             </Button>

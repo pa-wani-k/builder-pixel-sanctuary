@@ -4,7 +4,9 @@
  * and/or small pure JS functions that can be used on both client and server
  */
 
-export interface DemoResponse { message: string }
+export interface DemoResponse {
+  message: string;
+}
 
 export interface MedicalHistory {
   bloodGroup: string;

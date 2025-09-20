@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 
-const CHAT_URL = "https://91ced27b09e84f1097faa721e4e8da3b-main.projects.builder.my";
+const CHAT_URL =
+  "https://91ced27b09e84f1097faa721e4e8da3b-main.projects.builder.my";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);

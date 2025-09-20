@@ -52,7 +52,9 @@ export function createServer() {
   app.post("/api/appointments", (req, res) => {
     const { centre, patientId, slotISO } = req.body as Appointment;
     if (!centre || !patientId || !slotISO) {
-      res.status(400).json({ error: "centre, patientId and slotISO are required" });
+      res
+        .status(400)
+        .json({ error: "centre, patientId and slotISO are required" });
       return;
     }
     const appt: Appointment = {

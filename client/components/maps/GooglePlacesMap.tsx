@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Centre } from "@shared/api";
 
-const GOOGLE_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
+const GOOGLE_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as
+  | string
+  | undefined;
 
 function loadGoogleMaps(apiKey: string): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
@@ -19,7 +21,11 @@ function loadGoogleMaps(apiKey: string): Promise<void> {
   });
 }
 
-export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c: Centre) => void }) {
+export default function GooglePlacesMap({
+  onSelectCentre,
+}: {
+  onSelectCentre: (c: Centre) => void;
+}) {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const map = useRef<any | null>(null);
   const [centres, setCentres] = useState<Centre[]>([]);
@@ -52,7 +58,10 @@ export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c
   function geolocate() {
     if (!navigator.geolocation || !map.current) return;
     navigator.geolocation.getCurrentPosition((pos) => {
-      const loc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+      const loc = new google.maps.LatLng(
+        pos.coords.latitude,
+        pos.coords.longitude,
+      );
       map.current!.setCenter(loc);
       map.current!.setZoom(14);
       searchNearby("panchakarma centre");
@@ -133,18 +142,24 @@ export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c
         </div>
         {error && (
           <div className="rounded-md border p-4 text-sm bg-amber-50 text-amber-900">
-            Google Maps failed to load. Please enable billing and activate “Maps JavaScript API” and “Places API” for your key.
+            Google Maps failed to load. Please enable billing and activate “Maps
+            JavaScript API” and “Places API” for your key.
           </div>
         )}
         {!canUseGoogle && (
           <div className="rounded-md border p-4 text-sm text-foreground/80">
-            Set VITE_GOOGLE_MAPS_API_KEY and enable billing to use Google Maps. The dashboard still works without the map.
+            Set VITE_GOOGLE_MAPS_API_KEY and enable billing to use Google Maps.
+            The dashboard still works without the map.
           </div>
         )}
-        <div ref={mapRef} className="h-[380px] w-full rounded-lg border bg-muted/40" />
+        <div
+          ref={mapRef}
+          className="h-[380px] w-full rounded-lg border bg-muted/40"
+        />
         {loading && (
           <div className="flex items-center gap-2 text-sm text-foreground/70">
-            <Loader2 className="h-4 w-4 animate-spin" /> Searching nearby centres...
+            <Loader2 className="h-4 w-4 animate-spin" /> Searching nearby
+            centres...
           </div>
         )}
       </div>
@@ -174,7 +189,9 @@ export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c
               </button>
             ))}
             {centres.length === 0 && (
-              <div className="text-sm text-foreground/60">No results yet. Try search or Near me.</div>
+              <div className="text-sm text-foreground/60">
+                No results yet. Try search or Near me.
+              </div>
             )}
           </div>
         </div>
