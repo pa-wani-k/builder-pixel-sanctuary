@@ -64,7 +64,7 @@ export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c
     setLoading(true);
     const service = new google.maps.places.PlacesService(map.current);
     const bounds = map.current.getBounds();
-    const request: google.maps.places.PlaceSearchRequest = {
+    const request: any = {
       keyword,
       bounds: bounds ?? undefined,
       type: ["spa"],
