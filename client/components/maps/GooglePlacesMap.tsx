@@ -131,9 +131,14 @@ export default function GooglePlacesMap({ onSelectCentre }: { onSelectCentre: (c
             Near me
           </Button>
         </div>
+        {error && (
+          <div className="rounded-md border p-4 text-sm bg-amber-50 text-amber-900">
+            Google Maps failed to load. Please enable billing and activate “Maps JavaScript API” and “Places API” for your key.
+          </div>
+        )}
         {!canUseGoogle && (
           <div className="rounded-md border p-4 text-sm text-foreground/80">
-            Set VITE_GOOGLE_MAPS_API_KEY to enable Google Maps. Until then, the dashboard works without the map.
+            Set VITE_GOOGLE_MAPS_API_KEY and enable billing to use Google Maps. The dashboard still works without the map.
           </div>
         )}
         <div ref={mapRef} className="h-[380px] w-full rounded-lg border bg-muted/40" />
